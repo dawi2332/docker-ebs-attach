@@ -1,10 +1,9 @@
-FROM ubuntu:14.04
-MAINTAINER Louis Garman "louisgarman@gmail.com"
-#
-# install deps/tools
-#
-RUN apt-get -q update 
-RUN apt-get install -y python-requests python-boto
+FROM alpine
+MAINTAINER dawi2332@gmail.com
+RUN apk add --update py-boto py-pip \
+	&& pip install requests \
+	&& apk del py-pip \
+	&& rm -rf /var/cache/apk/*
 
 ADD ebs-attach.py ebs-attach.py
 
